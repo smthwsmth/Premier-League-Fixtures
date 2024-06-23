@@ -8,4 +8,5 @@
     <string name="news">Новости футбола</string>
     <string name="rating">Рейтинговая таблица</string>
     <string name="button_back">button_back</string>
+    <string name="back">back</string>
 </resources>

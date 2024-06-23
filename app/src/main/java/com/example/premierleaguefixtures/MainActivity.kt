@@ -13,6 +13,7 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
     }
+
     fun goToMenu(view: View) {
         val transfer = Intent(this, SecondActivity::class.java)
         startActivity(transfer)
