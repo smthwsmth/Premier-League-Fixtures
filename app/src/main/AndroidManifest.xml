@@ -19,7 +19,7 @@
             android:name=".RatingActivity"
             android:exported="false" />
         <activity
-            android:name=".ResultsActivity"
+            android:name=".InfoActivity"
             android:exported="false" />
         <activity
             android:name=".ScheduleActivity"

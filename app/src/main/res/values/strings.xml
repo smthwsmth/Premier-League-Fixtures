@@ -3,10 +3,11 @@
     <string name="welcome">Добро пожаловать!</string>
     <string name="goToMenu">Перейти в меню</string>
     <string name="mainPage">Главная страница</string>
-    <string name="schedule">Расписание матчей</string>
-    <string name="results">Результаты матчей</string>
+    <string name="schedule">Матчи</string>
+    <string name="results">Дополнительная информация</string>
     <string name="news">Новости футбола</string>
     <string name="rating">Рейтинговая таблица</string>
     <string name="button_back">button_back</string>
     <string name="back">back</string>
+    <string name="dropdown_menu">dropdownMenu</string>
 </resources>
