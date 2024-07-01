@@ -35,7 +35,7 @@ class SecondActivity : AppCompatActivity() {
         when(item.itemId) {
             android.R.id.home -> finish()
             R.id.dropdown_menu -> {
-                Toast.makeText(this, "Dropdown Menu", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Dropdown Menu", Toast.LENGTH_LONG).show()
             }
         }
         return true
