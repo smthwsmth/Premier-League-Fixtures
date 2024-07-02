@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:id="@+id/date_utc"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Дата:"
+                android:textStyle="bold"
+                android:textSize="30dp"
+                android:gravity="center"
+                android:layout_weight="0.33"/>
+
+            <TextView
+                android:id="@+id/date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="2021-08-13"
+                android:textSize="25dp"
+                android:layout_weight="0.33"/>
+
+            <TextView
+                android:id="@id/time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="19:00:00"
+                android:textSize="25dp"
+                android:layout_weight="0.33"/>
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/match_counters"
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/match_number_text"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="20dp"
+                android:text="Номер матча:"
+                android:textSize="25sp"
+                android:gravity="center"
+                android:layout_weight="0.35"/>
+
+            <TextView
+                android:id="@+id/match_number_int"
+                android:layout_width="96dp"
+                android:layout_height="match_parent"
+                android:text="1"
+                android:textSize="48sp"
+                android:gravity="center_vertical"
+                android:layout_weight="0.15"/>
+
+            <TextView
+                android:id="@+id/round_number_text"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+                android:text="Номер раунда:"
+                android:gravity="center"
+                android:textSize="25sp"
+                android:layout_weight="0.35"/>
+
+            <TextView
+                android:id="@+id/round_number_int"
+                android:layout_width="96dp"
+                android:layout_height="match_parent"
+                android:text="1"
+                android:textSize="48sp"
+                android:gravity="center_vertical"
+                android:layout_weight="0.15"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/stadium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@id/text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Стадион: "
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:gravity="center"/>
+
+            <TextView
+                android:id="@+id/stadium_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="Brentford Community Stadium"
+                android:textStyle="italic"
+                android:textSize="30dp"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Группа: "
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:gravity="right"
+                android:layout_weight="0.5"/>
+
+            <TextView
+                android:id="@+id/group_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="незвестно"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:gravity="left"
+                android:layout_weight="0.5"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/teams_names"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+
+
+            <TextView
+                android:id="@+id/home_team"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Brentford"
+                android:textSize="40dp"
+                android:textStyle="bold"
+                android:background="@color/white"
+                android:layout_weight="1"/>
+
+
+
+            <TextView
+                android:id="@+id/away_team"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Arsenal"
+                android:textSize="40dp"
+                android:textStyle="bold"
+                android:layout_weight="1"/>
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/teams_symbols"
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/home_team_symbol"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_football"
+                android:layout_weight="1"/>
+
+            <ImageView
+                android:id="@+id/away_team_symbol"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_football"
+                android:layout_weight="1"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/scores"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/home_team_scores"
+                android:layout_width="272dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="48dp"
+                android:text="2"
+                android:textSize="124dp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:layout_weight="0.4"
+                style="@style/FullScreen"/>
+
+            <TextView
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:text=":"
+                android:textSize="124dp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:layout_weight="0.1"/>
+
+            <TextView
+                android:id="@+id/away_team_scores"
+                android:layout_width="272dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="48dp"
+                android:text="0"
+                android:textSize="124dp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:layout_weight="0.4"
+                style="@style/FullScreen"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
