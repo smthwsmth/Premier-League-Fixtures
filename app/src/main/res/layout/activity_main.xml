@@ -2,50 +2,18 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.premierleaguefixtures.MainActivity">
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:contentDescription="@string/app_name"
-        android:scaleType="centerCrop"
-        android:src="@drawable/footballplayer" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/colorBackgroundLayer"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="-61dp" />
+    tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="371dp"
-        android:layout_height="129dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="300dp"
-        android:gravity="center"
-        android:text="@string/welcome"
-        android:textColor="@color/colorWhite"
-        android:textSize="@dimen/font_size"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hello World!"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/button5"
-        android:layout_width="312dp"
-        android:layout_height="114dp"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="96dp"
-        android:background="@color/cardview_shadow_start_color"
-        android:onClick="goToMenu"
-        android:text="@string/goToMenu"
-        android:textColor="@color/colorWhite"
-        android:textSize="@dimen/font_size_24"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
