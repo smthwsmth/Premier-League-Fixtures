@@ -13,24 +13,8 @@
         android:theme="@style/Theme.PremierLeagueFixtures"
         tools:targetApi="31">
         <activity
-            android:name=".NewsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".RatingActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ResultsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ScheduleActivity"
-            android:exported="false" />
-        <activity
-            android:name=".SecondActivity"
-            android:exported="false" />
-        <activity
             android:name=".MainActivity"
-            android:exported="true"
-            android:theme="@style/FullScreen">
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

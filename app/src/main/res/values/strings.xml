@@ -1,11 +1,3 @@
 <resources>
     <string name="app_name">Premier League Fixtures</string>
-    <string name="welcome">Добро пожаловать!</string>
-    <string name="goToMenu">Перейти в меню</string>
-    <string name="mainPage">Главная страница</string>
-    <string name="schedule">Расписание матчей</string>
-    <string name="results">Результаты матчей</string>
-    <string name="news">Новости футбола</string>
-    <string name="rating">Рейтинговая таблица</string>
-    <string name="button_back">button_back</string>
 </resources>
