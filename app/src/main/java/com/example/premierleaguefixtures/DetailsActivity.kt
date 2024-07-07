@@ -13,12 +13,11 @@ class DetailsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_details)
 
-//        val actionBar = supportActionBar
-//        actionBar?.setDisplayHomeAsUpEnabled(true)
+        appBarSettings()
 
     }
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.main, menu)         // inflate the ActionBar with buttons
+        menuInflater.inflate(R.menu.other_activities, menu)         // inflate the ActionBar with buttons
         return true
     }
 
@@ -27,14 +26,17 @@ class DetailsActivity : AppCompatActivity() {
         // checks if button "home" was pressed. If true - go back to previous page
         when(item.itemId) {
             android.R.id.home -> finish()
-            R.id.dropdown_menu -> {
-                Toast.makeText(this, "Dropdown Menu", Toast.LENGTH_LONG).show()
+            R.id.settings -> {
+                Toast.makeText(this, "Настройки", Toast.LENGTH_LONG).show()
             }
         }
         return true
-
     }
 
-
-
+    fun appBarSettings() {
+        setSupportActionBar(findViewById(R.id.appbar))
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        this.supportActionBar?.title = "Детали матча"
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_back)
+    }
 }

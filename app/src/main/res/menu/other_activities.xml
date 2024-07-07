@@ -12,13 +12,6 @@
         <menu>
 
             <item
-                android:id="@+id/search"
-                android:title="Поиск"
-                android:icon="@drawable/ic_search">
-
-            </item>
-
-            <item
                 android:id="@+id/settings"
                 android:title="Настройки"
                 android:icon="@drawable/ic_settings">
