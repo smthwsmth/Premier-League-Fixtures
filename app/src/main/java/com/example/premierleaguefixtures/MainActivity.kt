@@ -6,52 +6,62 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import org.json.JSONArray
-import java.io.BufferedReader
-import java.io.IOException
-import java.io.InputStream
+import com.example.premierleaguefixtures.databinding.ActivityMainBinding
+import kotlinx.coroutines.launch
 
+
+const val TAG = "MainActivity"
 class MainActivity : AppCompatActivity() {
 
-
-    private lateinit var recyclerView: RecyclerView
-    lateinit var matchesList: ArrayList<MatchItem>
+    private lateinit var binding: ActivityMainBinding
     private lateinit var matchAdapter: MatchAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
         appBarSettings()
+        setRecyclerView()
 
-        matchesList = arrayListOf()
+        lifecycleScope.launch { flowRetrofitCall() }
 
-        recyclerView = findViewById(R.id.recyclerview)
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.setHasFixedSize(true)
+        matchAdapter.setOnClickListener(object :
+            MatchAdapter.OnClickListener {
+            override fun onClick(position: Int, model: MatchItem) {
+                val intent = Intent(this@MainActivity, DetailsActivity::class.java)
 
-
-        readJSONFromAssets("matches.json")
-        matchAdapter = MatchAdapter(matchesList)
-        recyclerView.adapter = matchAdapter
-
-        /* processing of item clicks for getting more information about a match */
-        matchAdapter.onItemClick = {
-            val intent = Intent(this, DetailsActivity::class.java)
-
-            /* getting a team logo by means of the getTeamsLogo function */
-            val homeTeamLogo = getTeamsLogo(it.homeTeam.lowercase())
-            val awayTeamLogo = getTeamsLogo(it.awayTeam.lowercase())
-
-            // assigning team's logos to properties of MatchItem dataclass
-            it.homeLogo = homeTeamLogo
-            it.awayLogo = awayTeamLogo
-            intent.putExtra("match", it)
-            startActivity(intent)
-        }
-
-
+                // adding the logos for each team
+                model.homeLogo = getTeamsLogo(model.homeTeam)
+                model.awayLogo = getTeamsLogo(model.awayTeam)
+                intent.putExtra("match", model)
+                startActivity(intent)
+            }
+        })
     }
+
+    private suspend fun flowRetrofitCall() {
+        val flow = Flow().fetchItems()
+        binding.progressBar.isVisible = true
+        flow.collect { list -> matchAdapter.matches = list }
+        binding.progressBar.isVisible = false
+    }
+
+
+    private fun setRecyclerView() = binding.recyclerview.apply {
+        matchAdapter = MatchAdapter()
+        adapter = matchAdapter
+        layoutManager = LinearLayoutManager(this@MainActivity)
+    }
+
+
+
+
+
+
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.main, menu)         // inflate the ActionBar with buttons
@@ -76,51 +86,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun appBarSettings() {
-        setSupportActionBar(findViewById(R.id.appbar))
+        setSupportActionBar(binding.appbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_close)
     }
-
-
-
-    /* parsing a json file with matches info */
-    fun readJSONFromAssets(path: String) {
-
-        try {
-            val inputStream: InputStream = assets.open("matches.json")
-            val json = inputStream.bufferedReader().use(BufferedReader::readText)
-            var jsonarr = JSONArray(json)
-            for (i in 0..< jsonarr.length()) {
-                val jsonobj = jsonarr.getJSONObject(i)
-                val homeTeamName = jsonobj.getString("HomeTeam")
-                val awayTeamName = jsonobj.getString("AwayTeam")
-                val matchNumber = jsonobj.getString("MatchNumber")
-                val roundNumber = jsonobj.getString("RoundNumber")
-                val dateUtc = jsonobj.getString("DateUtc")
-                val location = jsonobj.getString("Location")
-                val group: String = jsonobj.getString("Group")
-                val homeTeamScore = jsonobj.getString("HomeTeamScore")
-                val awayTeamScore = jsonobj.getString("AwayTeamScore")
-
-                val match = MatchItem(
-                    dateUtc,
-                    homeTeamName,
-                    awayTeamName,
-                    homeTeamScore,
-                    awayTeamScore,
-                    matchNumber,
-                    roundNumber,
-                    location,
-                    group
-                )
-                matchesList.add(match)
-            }
-
-        } catch (e: IOException) {
-
-        }
-    }
-
 
 
     /* creating a function that returns icon in accordance with a key (team name) */
@@ -148,6 +117,6 @@ class MainActivity : AppCompatActivity() {
             "wolves" to R.drawable.wolves
         )
 
-        return teamsLogo.getOrDefault(teamName, R.drawable.ic_football)
+        return teamsLogo.getOrDefault(teamName.lowercase(), R.drawable.ic_football)
     }
 }
