@@ -1,50 +1,60 @@
 package com.example.premierleaguefixtures
 
+
 import android.os.Parcel
 import android.os.Parcelable
+import com.google.gson.annotations.SerializedName
 
 data class MatchItem(
-    val dateTime: String,
-    val homeTeam: String,
-    val awayTeam: String,
-    val homeTeamScores: String,
-    val awayTeamScores: String,
+    @SerializedName("MatchNumber")
     val matchNumber: String,
+    @SerializedName("RoundNumber")
     val roundNumber: String,
+    @SerializedName("DateUtc")
+    val dateUtc: String,
+    @SerializedName("Location")
     val location: String,
+    @SerializedName("HomeTeam")
+    val homeTeam: String,
+    @SerializedName("AwayTeam")
+    val awayTeam: String,
+    @SerializedName("Group")
     val group: String,
+    @SerializedName("HomeTeamScore")
+    val homeTeamScore: String,
+    @SerializedName("AwayTeamScore")
+    val awayTeamScore: String,
+
     var homeLogo: Int = R.drawable.ic_football,
     var awayLogo: Int = R.drawable.ic_football
-): Parcelable {
+) : Parcelable {
     constructor(parcel: Parcel) : this(
-        parcel.readString()!!,
-        parcel.readString()!!,
-        parcel.readString()!!,
-        parcel.readString()!!,
-        parcel.readString()!!,
-        parcel.readString()!!,
-        parcel.readString()!!,
-        parcel.readString()!!,
-        parcel.readString()!!,
+        parcel.readString().toString(),
+        parcel.readString().toString(),
+        parcel.readString().toString(),
+        parcel.readString().toString(),
+        parcel.readString().toString(),
+        parcel.readString().toString(),
+        parcel.readString().toString(),
+        parcel.readString().toString(),
+        parcel.readString().toString(),
         parcel.readInt(),
         parcel.readInt()
     ) {
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeString(dateTime)
-        parcel.writeString(homeTeam)
-        parcel.writeString(awayTeam)
-        parcel.writeString(homeTeamScores)
-        parcel.writeString(awayTeamScores)
         parcel.writeString(matchNumber)
         parcel.writeString(roundNumber)
+        parcel.writeString(dateUtc)
         parcel.writeString(location)
+        parcel.writeString(homeTeam)
+        parcel.writeString(awayTeam)
         parcel.writeString(group)
+        parcel.writeString(homeTeamScore)
+        parcel.writeString(awayTeamScore)
         parcel.writeInt(homeLogo)
         parcel.writeInt(awayLogo)
-
-
     }
 
     override fun describeContents(): Int {

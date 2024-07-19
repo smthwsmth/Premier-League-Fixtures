@@ -1,49 +1,69 @@
 package com.example.premierleaguefixtures
 
+
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import androidx.recyclerview.widget.AsyncListDiffer
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.example.premierleaguefixtures.databinding.MatchItemBinding
 
-class MatchAdapter(
-    private val matchesList: ArrayList<MatchItem>):
-    RecyclerView.Adapter<MatchAdapter.MatchViewHolder>() {
+class MatchAdapter: RecyclerView.Adapter<MatchAdapter.MatchViewHolder>() {
 
-        var onItemClick: ((MatchItem) -> Unit)? = null
+    inner class MatchViewHolder(val binding: MatchItemBinding) : RecyclerView.ViewHolder(binding.root)
 
+    private var onClickListener: OnClickListener? = null
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MatchViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.match_item, parent, false)
+    private val diffCallback = object : DiffUtil.ItemCallback<MatchItem>() {
+        override fun areItemsTheSame(oldItem: MatchItem, newItem: MatchItem): Boolean {
+            return oldItem.matchNumber == newItem.matchNumber
+        }
 
-        return MatchViewHolder(itemView)
-    }
-
-
-    override fun onBindViewHolder(holder: MatchViewHolder, position: Int) {
-        val currentItem = matchesList[position]
-        holder.rvHomeTeam.text = currentItem.homeTeam
-        holder.rvAwayTeam.text = currentItem.awayTeam
-        holder.rvHomeTeamScores.text = currentItem.homeTeamScores
-        holder.rvAwayTeamScores.text = currentItem.awayTeamScores
-
-        holder.itemView.setOnClickListener {
-            onItemClick?.invoke(currentItem)
+        override fun areContentsTheSame(oldItem: MatchItem, newItem: MatchItem): Boolean {
+            return oldItem == newItem
         }
     }
 
-    override fun getItemCount(): Int {
-        return matchesList.size
+    private val differ = AsyncListDiffer(this, diffCallback)
+    var matches: List<MatchItem>
+        get() = differ.currentList
+        set(value) {
+            differ.submitList(value)
+        }
+
+    override fun getItemCount() = matches.size
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MatchViewHolder {
+        return MatchViewHolder(
+            MatchItemBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
+    }
+
+    override fun onBindViewHolder(holder: MatchViewHolder, position: Int) {
+        holder.binding.apply {
+            val match = matches[position]
+            homeTeam.text = match.homeTeam
+            awayTeam.text = match.awayTeam
+            homeTeamScores.text = match.homeTeamScore
+            awayTeamScores.text = match.awayTeamScore
+            holder.itemView.setOnClickListener {
+                onClickListener?.onClick(position, match)
+            }
+        }
+
 
     }
 
+    fun setOnClickListener(listener: OnClickListener?) {
+        this.onClickListener = listener
+    }
 
-    class MatchViewHolder(
-        itemView: View
-    ): RecyclerView.ViewHolder(itemView){
-        val rvHomeTeam: TextView = itemView.findViewById<TextView>(R.id.home_team)
-        val rvAwayTeam: TextView = itemView.findViewById<TextView>(R.id.away_team)
-        val rvHomeTeamScores: TextView = itemView.findViewById<TextView>(R.id.home_team_scores)
-        val rvAwayTeamScores: TextView = itemView.findViewById<TextView>(R.id.away_team_scores)
+    // Interface for the click listener
+    interface OnClickListener {
+        fun onClick(position: Int, model: MatchItem)
     }
 }

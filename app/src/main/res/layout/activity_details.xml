@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:theme="@style/Base.Theme.RetrofitSync">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/appbar"
@@ -21,6 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="vertical"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appbar">
 
@@ -39,9 +41,8 @@
                 android:layout_marginStart="30dp"
                 android:layout_weight="0.33"
                 android:gravity="center_vertical"
-
                 android:text="Дата:"
-                android:textSize="30dp"
+                android:textSize="30sp"
                 android:textStyle="bold" />
 
 
@@ -53,16 +54,8 @@
                 android:layout_weight="0.33"
                 android:text="2021-08-13"
                 android:gravity="center"
+                android:textSize="25sp" />
 
-                android:textSize="25dp" />
-
-<!--            <TextView-->
-<!--                android:id="@id/time"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_weight="0.33"-->
-<!--                android:text="19:00:00"-->
-<!--                android:textSize="25dp" />-->
 
 
         </LinearLayout>
@@ -133,7 +126,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="Стадион: "
-                android:textSize="20dp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -142,8 +135,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:text="Brentford Community Stadium"
+                android:autoSizeTextType="uniform"
+                android:autoSizeMinTextSize="10sp"
+                android:autoSizeMaxTextSize="48sp"
+                android:autoSizeStepGranularity="2sp"
                 android:gravity="center"
-                android:textSize="30dp"
+                android:textSize="30sp"
                 android:textStyle="italic" />
 
         </LinearLayout>
@@ -152,34 +149,24 @@
         <LinearLayout
             android:id="@+id/group"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="5dp"
             android:layout_gravity="center"
             android:layout_weight="1"
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:gravity="right"
-                android:text="Группа: "
-                android:textSize="20dp"
-                android:textStyle="bold" />
-
-            <TextView
                 android:id="@+id/group_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:gravity="left"
-                android:text="незвестно"
-                android:textSize="20dp"
+                android:gravity="center"
+                android:text="Группа: неизвестно"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/teams_names"
+            android:id="@+id/teams"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -189,35 +176,18 @@
 
 
             <TextView
-                android:id="@+id/home_team"
+                android:id="@+id/teams_titles"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@color/white"
+                android:layout_height="match_parent"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
                 android:gravity="center"
-                android:text="Brentford"
-                android:textSize="40dp"
+                android:text="Brentford        Arsenal"
                 android:autoSizeTextType="uniform"
-                android:autoSizeMinTextSize="10sp"
+                android:autoSizeMinTextSize="24sp"
                 android:autoSizeMaxTextSize="48sp"
                 android:autoSizeStepGranularity="2sp"
                 android:textStyle="bold" />
-
-
-            <TextView
-                android:id="@+id/away_team"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="Arsenal"
-                android:textSize="40dp"
-                android:autoSizeTextType="uniform"
-                android:autoSizeMinTextSize="10sp"
-                android:autoSizeMaxTextSize="48sp"
-                android:autoSizeStepGranularity="2sp"
-                android:textStyle="bold" />
-
 
         </LinearLayout>
 
@@ -234,6 +204,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:contentDescription="Home Team Logo"
                 android:src="@drawable/ic_football" />
 
             <ImageView
@@ -241,7 +212,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:src="@drawable/ic_football" />
+                android:src="@drawable/ic_football"
+                android:contentDescription="Away Team logo"/>
         </LinearLayout>
 
         <LinearLayout
@@ -253,35 +225,44 @@
 
             <TextView
                 android:id="@+id/home_team_scores"
-                style="@style/FullScreen"
-                android:layout_width="272dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="48dp"
-                android:layout_weight="0.4"
+                android:layout_width="0dp"
+                android:layout_height="173dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:autoSizeMaxTextSize="124sp"
+                android:autoSizeMinTextSize="24sp"
+                android:autoSizeStepGranularity="2sp"
+                android:autoSizeTextType="uniform"
                 android:gravity="center"
                 android:text="2"
-                android:textSize="124dp"
                 android:textStyle="bold" />
 
             <TextView
-                android:layout_width="110dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="1"
                 android:gravity="center"
                 android:text=":"
-                android:textSize="124dp"
+                android:textSize="124sp"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/away_team_scores"
-                style="@style/FullScreen"
-                android:layout_width="272dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="48dp"
-                android:layout_weight="0.4"
+                android:layout_width="0dp"
+                android:layout_height="173dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="40dp"
+                android:layout_weight="1"
+                android:autoSizeMaxTextSize="124sp"
+                android:autoSizeMinTextSize="8sp"
+                android:autoSizeStepGranularity="2sp"
+                android:autoSizeTextType="uniform"
                 android:gravity="center"
                 android:text="0"
-                android:textSize="124dp"
                 android:textStyle="bold" />
 
         </LinearLayout>
