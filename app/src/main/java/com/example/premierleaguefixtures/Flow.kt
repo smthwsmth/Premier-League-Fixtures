@@ -9,7 +9,7 @@ import retrofit2.Response
 import java.io.IOException
 
 
-// Flow is called from the MainActivity
+// This Flow is called from the MainActivity
 class Flow {
 
     fun fetchItems(): Flow<List<MatchItem>> = flow {
