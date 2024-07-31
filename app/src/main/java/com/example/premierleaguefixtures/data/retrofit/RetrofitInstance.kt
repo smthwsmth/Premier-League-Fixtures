@@ -1,4 +1,4 @@
-package com.example.premierleaguefixtures
+package com.example.premierleaguefixtures.data.retrofit
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

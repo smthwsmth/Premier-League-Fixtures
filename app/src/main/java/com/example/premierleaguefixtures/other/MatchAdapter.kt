@@ -1,4 +1,4 @@
-package com.example.premierleaguefixtures
+package com.example.premierleaguefixtures.other
 
 
 import android.view.LayoutInflater
@@ -6,13 +6,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.example.premierleaguefixtures.data.models.MatchItem
 import com.example.premierleaguefixtures.databinding.MatchItemBinding
 
 class MatchAdapter: RecyclerView.Adapter<MatchAdapter.MatchViewHolder>() {
 
     inner class MatchViewHolder(val binding: MatchItemBinding) : RecyclerView.ViewHolder(binding.root)
 
-    private var onClickListener: OnClickListener? = null
+
 
     private val diffCallback = object : DiffUtil.ItemCallback<MatchItem>() {
         override fun areItemsTheSame(oldItem: MatchItem, newItem: MatchItem): Boolean {
@@ -24,14 +25,9 @@ class MatchAdapter: RecyclerView.Adapter<MatchAdapter.MatchViewHolder>() {
         }
     }
 
-    private val differ = AsyncListDiffer(this, diffCallback)
-    var matches: List<MatchItem>
-        get() = differ.currentList
-        set(value) {
-            differ.submitList(value)
-        }
+    val differ = AsyncListDiffer(this, diffCallback)
 
-    override fun getItemCount() = matches.size
+    override fun getItemCount() = differ.currentList.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MatchViewHolder {
         return MatchViewHolder(
@@ -45,7 +41,7 @@ class MatchAdapter: RecyclerView.Adapter<MatchAdapter.MatchViewHolder>() {
 
     override fun onBindViewHolder(holder: MatchViewHolder, position: Int) {
         holder.binding.apply {
-            val match = matches[position]
+            val match = differ.currentList[position]
             homeTeam.text = match.homeTeam
             awayTeam.text = match.awayTeam
             homeTeamScores.text = match.homeTeamScore
@@ -55,9 +51,9 @@ class MatchAdapter: RecyclerView.Adapter<MatchAdapter.MatchViewHolder>() {
             }
         }
 
-
     }
 
+    private var onClickListener: OnClickListener? = null
     fun setOnClickListener(listener: OnClickListener?) {
         this.onClickListener = listener
     }
