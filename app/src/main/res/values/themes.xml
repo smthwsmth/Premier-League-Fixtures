@@ -1,9 +1,11 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.PremierLeagueFixtures" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    <style name="Base.Theme.RetrofitSync" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:windowFullscreen">true</item>
     </style>
 
-    <style name="Theme.PremierLeagueFixtures" parent="Base.Theme.PremierLeagueFixtures" />
+    <style name="Theme.RetrofitSync" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
 </resources>
